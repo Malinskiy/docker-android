@@ -3,10 +3,10 @@ IMAGE_NAME=docker-android-example
 VCS_REF=`git rev-parse --short HEAD`
 IMAGE_VERSION=1.0.$(TRAVIS_BUILD_NUMBER)
 QNAME=$(OWNER)/$(IMAGE_NAME)
-
 GIT_TAG=$(QNAME):$(VCS_REF)
 BUILD_TAG=$(QNAME):$(IMAGE_VERSION)
 LATEST_TAG=$(QNAME):latest
+ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 build:
 	docker build \
@@ -15,7 +15,7 @@ build:
 		-t $(GIT_TAG) .
 
 lint:
-	docker run -it --rm -v "$(pwd)/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
+	docker run -it --rm -v "$(ROOT_DIR)/Dockerfile:/Dockerfile:ro" redcoolbeans/dockerlint
 
 tag:
 	docker tag $(GIT_TAG) $(BUILD_TAG)

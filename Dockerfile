@@ -6,7 +6,7 @@ MAINTAINER Anton Malinskiy "anton@malinskiy.com"
 # Make JRE aware of container limits
 COPY ./container-limits /
 # Set up insecure default adb key
-ADD adb/adbkey adb/adbkey.pub /root/.android/
+COPY adb/* /root/.android/
 
 ENV LINK_ANDROID_SDK=https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip \
     LANG=en_US.UTF-8 \
@@ -65,7 +65,7 @@ RUN curl -sSL $LINK_ANDROID_SDK > /tmp/android-sdk-linux.zip && \
 
 # Install Gradle
 RUN cd /opt && \
-    curl -fl -sSL https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle-bin.zip && \
+    curl -fl -sSL https://downloads.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip -o gradle-bin.zip && \
     unzip -q "gradle-bin.zip" && \
     rm "gradle-bin.zip" && \
     mkdir -p ~/.gradle && \
