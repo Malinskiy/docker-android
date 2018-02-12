@@ -12,7 +12,6 @@ ENV LINK_ANDROID_SDK=https://dl.google.com/android/repository/sdk-tools-linux-38
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8 \
-    # To save layers you have to update this manually
     GRADLE_VERSION=4.1 \
     GRADLE_HOME="/opt/gradle-4.1/bin" \
     ANDROID_HOME=/opt/android-sdk-linux \
@@ -53,10 +52,7 @@ RUN curl -sSL $LINK_ANDROID_SDK > /tmp/android-sdk-linux.zip && \
     sdkmanager \
       tools \
       platform-tools \
-      "platforms;android-25" \
       "platforms;android-26" \
-      "build-tools;26.0.0" \
-      "build-tools;26.0.1" \
       "build-tools;26.0.2" \
       --verbose && \
     unset ANDROID_NDK_HOME && \
