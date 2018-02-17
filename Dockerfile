@@ -36,12 +36,8 @@ RUN apt-get update && \
 RUN curl -sSL https://rvm.io/mpapis.asc | gpg --import - && \
     curl -sSL https://get.rvm.io | grep -v __rvm_print_headline | bash -s stable --ruby && \
     echo "source /usr/local/rvm/scripts/rvm" >> ~/.bashrc && \
-    git clone https://github.com/tseglevskiy/stf-client.git && \
-    cd stf-client && \
-    /bin/bash -l -c "gem build stf-client.gemspec" && \
-    /bin/bash -l -c "gem install stf-client*gem" && \
-    cd .. && \
-    rm -rf stf-client
+    # Install gems
+    /bin/bash -l -c "gem install bundler stf-client:0.2.0 --no-ri --no-rdoc"
 
 # Install Android SDK
 RUN curl -sSL $LINK_ANDROID_SDK > /tmp/android-sdk-linux.zip && \
